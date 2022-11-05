@@ -4,14 +4,32 @@ import java.util.List;
 
 import hr.fer.oprpp1.hw04.db.model.StudentRecord;
 
+/**
+ * The Class QueryFilter.
+ */
 public class QueryFilter implements IFilter {
 
+	/** The expressions. */
 	private List<ConditionalExpression> expressions;
 
+	/**
+	 * Instantiates a new query filter.
+	 *
+	 * @param expressions the expressions
+	 */
 	public QueryFilter(List<ConditionalExpression> expressions) {
+		if(expressions == null) {
+			throw new NullPointerException("expression should not be null");
+		}
 		this.expressions = expressions;
 	}
 
+	/**
+	 * Accepts.
+	 *
+	 * @param record the record
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean accepts(StudentRecord record) {
 		if (record == null) {

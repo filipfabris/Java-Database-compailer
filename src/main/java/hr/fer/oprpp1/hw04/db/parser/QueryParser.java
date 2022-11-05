@@ -12,14 +12,25 @@ import hr.fer.oprpp1.hw04.db.strategy.FieldValueGetters;
 import hr.fer.oprpp1.hw04.db.strategy.IComparisonOperator;
 import hr.fer.oprpp1.hw04.db.strategy.IFieldValueGetter;
 
+/**
+ * The Class QueryParser.
+ */
 public class QueryParser {
 	
+	/** The current token. */
 	private Token currentToken;
+	
+	/** The lexer. */
 	private Lexer lexer;
 	
 	
+	/** The expressions. */
 	private List<ConditionalExpression> expressions;
+    
+    /** The Constant variableGetter. */
     private static final Map<String, IFieldValueGetter> variableGetter;
+    
+    /** The Constant operatorGetter. */
     private static final Map<String, IComparisonOperator> operatorGetter;
     
     static {
@@ -38,6 +49,11 @@ public class QueryParser {
     	operatorGetter.put("like", ComparisonOperators.LIKE);
     }
     
+	/**
+	 * Instantiates a new query parser.
+	 *
+	 * @param lexer the lexer
+	 */
 	QueryParser(Lexer lexer){
 		this.lexer = lexer;
 		this.expressions = new LinkedList<>();
@@ -46,11 +62,19 @@ public class QueryParser {
 		this.parse();
 	}
 
+	/**
+	 * Instantiates a new query parser.
+	 *
+	 * @param string the string
+	 */
 	public QueryParser(String string) {
 		this(new Lexer(string));
 	}
 
 	//Gramatika
+	/**
+	 * Parses the.
+	 */
 	//VARIABLE - OPERATOR - VALUE_GRADE/VALUE_JMBAG/VALUE_NAME
 	private void parse() {	
 		if(isTokenOfType(TokenType.QUERY) == false) {
@@ -84,6 +108,9 @@ public class QueryParser {
 
 
 
+	/**
+	 * Parses the expresion.
+	 */
 	private void parseExpresion() {
 		
 		//jmbag,firstname,lastname
@@ -114,14 +141,29 @@ public class QueryParser {
 		nextToken();
 	}
 
+	/**
+	 * Next token.
+	 */
 	private void nextToken() {
 		currentToken = lexer.nextToken();
 	}
 
+	/**
+	 * Checks if is token of type.
+	 *
+	 * @param type the type
+	 * @return true, if is token of type
+	 */
 	private boolean isTokenOfType(TokenType type) {
 		return currentToken.getType().equals(type);
 	}
 	
+	/**
+	 * Checks if is type valid.
+	 *
+	 * @param dbVariable the db variable
+	 * @return true, if is type valid
+	 */
 	private boolean isTypeValid(String dbVariable) {
 		if(dbVariable.equals("jmbag") && isTokenOfType(TokenType.VALUE_JMBAG) == true) {
 			return true;
@@ -136,6 +178,11 @@ public class QueryParser {
 		
 	}
 
+	/**
+	 * Checks if is direct query.
+	 *
+	 * @return true, if is direct query
+	 */
 	public boolean isDirectQuery() {
 		if(expressions.size() == 1 && 
 		   expressions.get(0).getFieldValueGetter() == FieldValueGetters.JMBAG && 
@@ -146,6 +193,11 @@ public class QueryParser {
 		return false;
 	}
 	
+	/**
+	 * Gets the queried JMBAG.
+	 *
+	 * @return the queried JMBAG
+	 */
 	public String getQueriedJMBAG() {
 		if (isDirectQuery() == false) {
 			throw new IllegalStateException("not direct query!");
@@ -153,6 +205,11 @@ public class QueryParser {
         return expressions.get(0).getValueComparison();
 	}
 	
+	/**
+	 * Gets the query.
+	 *
+	 * @return the query
+	 */
 	public List<ConditionalExpression> getQuery() {
 		return expressions;
 	}

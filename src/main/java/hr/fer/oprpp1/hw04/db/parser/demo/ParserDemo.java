@@ -1,6 +1,8 @@
 package hr.fer.oprpp1.hw04.db.parser.demo;
 
 import hr.fer.oprpp1.hw04.db.parser.QueryParser;
+import hr.fer.oprpp1.hw04.db.strategy.ComparisonOperators;
+import hr.fer.oprpp1.hw04.db.strategy.IComparisonOperator;
 
 public class ParserDemo {
 
@@ -16,6 +18,10 @@ public class ParserDemo {
 		System.out.println("isDirectQuery(): " + qp2.isDirectQuery()); // false
 		//System.out.println(qp2.getQueriedJMBAG()); // would throw!
 		System.out.println("size: " + qp2.getQuery().size()); // 2
+		
+		IComparisonOperator oper = ComparisonOperators.LIKE;
+		
+		oper.satisfied("TENK99Tenk", "TENK");
 	}
 
 }

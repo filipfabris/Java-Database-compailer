@@ -3,12 +3,21 @@ package hr.fer.oprpp1.hw04.db.lexer;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * The Class Lexer.
+ */
 public class Lexer {
 
+	/** The data. */
 	private char[] data; // ulazni tekst
+	
+	/** The current token. */
 	private Token token; // trenutni token
+	
+	/** The current index. */
 	private int currentIndex; // indeks prvog neobrađenog znaka
 
+	/** List of database column names. */
 	private static final List<String> dataBaseVariableName;
 
 	static {
@@ -18,6 +27,11 @@ public class Lexer {
 		dataBaseVariableName.add("lastName");
 	}
 
+	/**
+	 * Instantiates a new lexer.
+	 *
+	 * @param text the text
+	 */
 	public Lexer(String text) {
 
 		if (text == null) {
@@ -29,6 +43,11 @@ public class Lexer {
 		this.token = null;
 	}
 
+	/**
+	 * Next token.
+	 *
+	 * @return the token
+	 */
 	public Token nextToken() {
 
 		if (token != null && token.getType() == TokenType.EOF) {
@@ -70,7 +89,8 @@ public class Lexer {
 			
 			String output = sb.toString();
 			
-			String jmbagChecker = output.substring(1, output.length()-1);
+//			String jmbagChecker = output.substring(1, output.length()-1);
+			String jmbagChecker = output;
 			
 			if(jmbagChecker.matches("\\d+")) {
 				return new Token(TokenType.VALUE_JMBAG, output);
@@ -126,10 +146,18 @@ public class Lexer {
 		throw new LexerException("Error during lexical analysic");
 	}
 
+	/**
+	 * Gets the token.
+	 *
+	 * @return the token
+	 */
 	public Token getToken() {
 		return token;
 	}
 
+	/**
+	 * Skip blanks.
+	 */
 	private void skipBlanks() {
 		while (currentIndex < data.length) {
 			if (data[currentIndex] == '\r' || data[currentIndex] == '\n' || data[currentIndex] == '\t'

@@ -3,11 +3,22 @@ package hr.fer.oprpp1.hw04.db.model;
 import java.util.*;
 import hr.fer.oprpp1.hw04.db.strategy.IFilter;
 
+/**
+ * The Class StudentDatabase.
+ */
 public class StudentDatabase {
 
+	/** The records. */
 	List<StudentRecord> records;
+	
+	/** The index records. */
 	Map<String, StudentRecord> indexRecords;
 
+	/**
+	 * Instantiates a new student database.
+	 *
+	 * @param dataInput the data input
+	 */
 	public StudentDatabase(List<String> dataInput) {
 		if (dataInput == null) {
 			throw new RuntimeException("Input is empty");
@@ -18,11 +29,23 @@ public class StudentDatabase {
 		this.populateRecords(dataInput);
 	}
 	
+	/**
+	 * For JMBAG.
+	 *
+	 * @param jmbag the jmbag
+	 * @return the student record
+	 */
 	public StudentRecord forJMBAG(String jmbag) {
 		StudentRecord temp = indexRecords.get(jmbag);
 		return temp;
 	}
 	
+	/**
+	 * Filter.
+	 *
+	 * @param filter the filter
+	 * @return the list
+	 */
 	public List<StudentRecord> filter(IFilter filter) {
 		List<StudentRecord> outList = new LinkedList<>();
 		
@@ -36,6 +59,11 @@ public class StudentDatabase {
 	}
 	
 	
+	/**
+	 * Populate records.
+	 *
+	 * @param dataInput the data input
+	 */
 	private void populateRecords(List<String> dataInput) {
 
 		for (String element : dataInput) {
