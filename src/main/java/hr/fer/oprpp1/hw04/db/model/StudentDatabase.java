@@ -1,8 +1,6 @@
 package hr.fer.oprpp1.hw04.db.model;
 
 import java.util.*;
-
-import hr.fer.oprpp1.hw04.db.model.StudentRecord;
 import hr.fer.oprpp1.hw04.db.strategy.IFilter;
 
 public class StudentDatabase {
