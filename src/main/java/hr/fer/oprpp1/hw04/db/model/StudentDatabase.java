@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package hr.fer.oprpp1.hw04.db.model;
 
 import java.util.*;
@@ -29,6 +32,7 @@ public class StudentDatabase {
 		this.populateRecords(dataInput);
 	}
 	
+
 	/**
 	 * For JMBAG.
 	 *
@@ -40,6 +44,7 @@ public class StudentDatabase {
 		return temp;
 	}
 	
+
 	/**
 	 * Filter.
 	 *

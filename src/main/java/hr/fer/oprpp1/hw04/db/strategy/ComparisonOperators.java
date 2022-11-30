@@ -1,5 +1,7 @@
 package hr.fer.oprpp1.hw04.db.strategy;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The Class ComparisonOperators.
@@ -45,6 +47,17 @@ public class ComparisonOperators {
 		
 		if(value1.equals(value2) == true) {
 			return true;
+		}
+		
+		Pattern regex = Pattern.compile("[*]");
+		Matcher specialSign = regex.matcher(value2);
+		int count = 0;
+		while(specialSign.find()) {
+			count++;
+		}
+		
+		if(count > 1) {
+			throw new RuntimeException(String.format("Special sign '*' can occur at most once, in your input it was inserted %d times", count));
 		}
 		
 		// inside value2 like statment

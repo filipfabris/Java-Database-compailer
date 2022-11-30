@@ -56,5 +56,11 @@ class ComparisonOperatorsTest {
 		assertEquals(true, oper.satisfied("TENK99Tenk", "TENK*"));
 	}
 	
+	@Test
+	void LIKE7test() {
+		oper = ComparisonOperators.LIKE;
+		assertThrows(RuntimeException.class, () -> oper.satisfied("TENK99Tenk", "TEN*K*"));
+	}
+	
 
 }

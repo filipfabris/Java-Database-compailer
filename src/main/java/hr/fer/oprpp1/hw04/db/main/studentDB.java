@@ -21,7 +21,7 @@ import hr.fer.oprpp1.hw04.db.strategy.QueryFilter;
 
 public class studentDB {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 
 		List<String> rows = null;
 
@@ -46,6 +46,7 @@ public class studentDB {
 
 		while (true) {
 			try {
+				Thread.sleep(100);
 				System.out.print("> ");
 				String input = sc.nextLine().trim();
 
@@ -65,7 +66,8 @@ public class studentDB {
 				out.println(dbOutObject.formatedOutput());
 				
 			} catch (RuntimeException e) {
-				System.err.println("Query error\n");
+				//Bolje isto stavit na .out jer su drugaciji thredovi pa se ispis raspadne za novi upis, stavio sam zato Tread sleep
+				System.err.print("Query error\n");
 				System.err.println(e.getMessage());
 			}
 		}
